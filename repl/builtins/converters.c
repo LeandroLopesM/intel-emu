@@ -1,7 +1,7 @@
 #include "../../core/colors.h"
 
 #include "../../core/common.h"
-#include "../i8080-cc/assembler/parser/util/arrays.h"
+#include "../i8080-asm/assembler/parser/util/arrays.h"
 #include <stdio.h>
 #include <stdlib.h>
 

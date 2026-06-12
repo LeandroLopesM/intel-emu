@@ -15,5 +15,5 @@ $(OBJDIR)/interface.o: repl/repl.c
 $(OBJDIR)/builtins.o: repl/builtins/builtins.c
 	$(CC) repl/builtins/builtins.c -c -o $(OBJDIR)/builtins.o $(CFLAGS)
 
-CC_DIR=repl/i8080-cc/assembler
-include repl/i8080-cc/assembler/assembler.mk
+CC_DIR=repl/i8080-asm/assembler
+include repl/i8080-asm/assembler/assembler.mk

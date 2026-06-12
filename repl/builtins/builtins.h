@@ -10,11 +10,11 @@
 #include "../../cpu/cpu.h"
 #include "../../cpu/debug/debug.h"
 
-#include "../i8080-cc/assembler/parser/util/arrays.h"
-#include "../i8080-cc/assembler/encoder/encoder.h"
-#include "../i8080-cc/assembler/parser/parser.h"
+#include "../i8080-asm/assembler/parser/util/arrays.h"
+#include "../i8080-asm/assembler/encoder/encoder.h"
+#include "../i8080-asm/assembler/parser/parser.h"
 
-#include "../i8080-cc/core/common.h"
+#include "../i8080-asm/core/common.h"
 
 void dump(string_arr* sa);
 void help();

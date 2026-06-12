@@ -7,11 +7,11 @@
 #include "../cpu/cpu.h"
 
 #include "builtins/builtins.h"
-#include "i8080-cc/assembler/parser/util/arrays.h"
-#include "i8080-cc/assembler/encoder/encoder.h"
-#include "i8080-cc/assembler/parser/parser.h"
+#include "i8080-asm/assembler/parser/util/arrays.h"
+#include "i8080-asm/assembler/encoder/encoder.h"
+#include "i8080-asm/assembler/parser/parser.h"
 
-#include "i8080-cc/core/common.h"
+#include "i8080-asm/core/common.h"
 cpu c;
 
 int read_line(string* s)
