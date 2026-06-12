@@ -55,6 +55,10 @@ dump_all:
     }
 }
 
+void help(string_arr* a) {
+    
+}
+
 void parse_builtin(string_arr* sa)
 {
     if (strcmp(sa->items[0].items, "/dump") == 0)
@@ -69,6 +73,8 @@ void parse_builtin(string_arr* sa)
         b2d(sa);
     else if(strcmp(sa->items[0].items, "/d2b") == 0)
         d2b(sa);
+    else if (strstr(sa->items[0].items, "/h") == 0)
+        help(sa);
     else error("Unknown command %s", sa->items[0].items);
 }
 
@@ -157,26 +163,26 @@ int start_repl()
         else
         {
             int ff = 0;
-            comp_unit cu = parse_line(in_raw.items, &ff);
+            comp_unit comp = parse_line(in_raw.items, &ff);
             if (ff)
                 continue;
             WHEN_VERBOSE(printf(
                 "\n+ CompUnit:\n| Instr %d\n| A %d\n| B %d\n| C %d\n",
-                cu.type,
-                cu.opA? *cu.opA : 0,
-                cu.opB? *cu.opB : 0,
-                cu.opC? *cu.opC : 0));
+                comp.type,
+                comp.opA? *comp.opA : 0,
+                comp.opB? *comp.opB : 0,
+                comp.opC? *comp.opC : 0));
 
-            byte b = encode(&cu);
+            byte b = encode(&comp);
 
             if (b == 0)
                 continue;
 
             c.memory[0] = b;
-            if (*cu.opA != 0)
-                c.memory[1] = *cu.opA;
-            if (*cu.opB != 0)
-                c.memory[2] = *cu.opB;
+            if (*comp.opA != 0)
+                c.memory[1] = *comp.opA;
+            if (*comp.opB != 0)
+                c.memory[2] = *comp.opB;
 
             instruction *i = decode(&c, -1, 0);
 

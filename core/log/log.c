@@ -28,6 +28,14 @@ void warn(const char* fmt, ...)
     va_end(va);
 }
 
+void info(const char* fmt, ...)
+{
+    va_list va;
+    va_start(va, fmt);
+    __log(CYAN"INFO"RESET, fmt, &va);
+    va_end(va);
+}
+
 void debug(const char* fmt, ...)
 {
     va_list va;

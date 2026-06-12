@@ -11,9 +11,10 @@
 
 typedef void(*err_handler_t(int));
 
+void info(const char* fmt, ...);
+void debug(const char* fmt, ...);
 void error(const char* fmt, ...);
 void warn(const char* fmt, ...);
-void debug(const char* fmt, ...);
 void panic(const char* fmt, ...);
 void panic_ext(cpu *c, const char* fmt, ...);
 
