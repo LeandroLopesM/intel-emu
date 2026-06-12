@@ -1,18 +1,19 @@
+#include "../../core/colors.h"
 #include "debug.h"
 #include <stdint.h>
 #include <stdio.h>
 
 void dump_registers(cpu* c)
 {
-    printf("* Core dump:\n");
-    printf("| SP: %-4X PC: %-4X\n", c->rgf.SP, c->rgf.PC);
+    printf(BLUE"* Core dump:\n"RESET);
+    printf("| SP: %-4Xh PC: %-4Xh\n", c->rgf.SP, c->rgf.PC);
     printf("| %d%d%d%d%d%d\n", c->rgf.S, c->rgf.Z, c->rgf.I, c->rgf.P, c->rgf.CY, c->rgf.AC);
     printf("| SZIPCA\n");
-    printf("+ General registers:\n");
-    printf("| PSW: %-4X A: %2X:\n", c->rgf.A, c->rgf.PSW);
-    printf("| D: %2X E: %2X => DE: %-4X\n", c->rgf.D, c->rgf.E, c->rgf.DE);
-    printf("| B: %2X C: %2X => BC: %-4X\n", c->rgf.B, c->rgf.C, c->rgf.BC);
-    printf("| H: %2X L: %2X => HL: %-4X\n", c->rgf.H, c->rgf.L, c->rgf.HL);
+    printf(BLUE"+ General registers:\n"RESET);
+    printf("| PSW: %-4Xh A: %2Xh:\n", c->rgf.A, c->rgf.PSW);
+    printf("| D: %2Xh E: %2Xh => DE: %-4Xh\n", c->rgf.D, c->rgf.E, c->rgf.DE);
+    printf("| B: %2Xh C: %2Xh => BC: %-4Xh\n", c->rgf.B, c->rgf.C, c->rgf.BC);
+    printf("| H: %2Xh L: %2Xh => HL: %-4Xh\n", c->rgf.H, c->rgf.L, c->rgf.HL);
 
     fflush(stdout);
 }
