@@ -8,7 +8,7 @@ EMU_DEPS = 					\
 	emu.c					\
 	$(OBJDIR)/core.o		\
 	$(OBJDIR)/cpu.o			\
-	$(OBJDIR)/cli.o
+	$(OBJDIR)/repl.o
 
 $(BINDIR)/emu: $(OBJDIR) $(EMU_DEPS)
 	$(CC) $(EMU_DEPS) -o $(BINDIR)/emu $(CFLAGS)
@@ -21,7 +21,7 @@ ifdef VERBOSE
 CFLAGS+=-DVERBOSE=1
 endif
 
-include cli/cli.mk
+include repl/repl.mk
 include cpu/cpu.mk
 include core/core.mk
 

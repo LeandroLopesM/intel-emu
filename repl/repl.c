@@ -133,7 +133,7 @@ const char* b2s(byte n)
     return out;
 }
 
-int start_cli()
+int start_repl()
 {
     memset(&c, 0, sizeof(cpu));
     string in_raw = {0};
