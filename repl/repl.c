@@ -55,8 +55,14 @@ dump_all:
     }
 }
 
-void help(string_arr* a) {
-    
+void help(string_arr* _) {
+    info("Available commands:");
+    info(" > /dump Shows the current state of CPU registers ");
+    info(" > /set  Sets a specific register or memory position to a value");
+    info(" > /hex  Converts a decimal value to hexadecimal");
+    info(" > /b2d  Converts a binary value to decimal");
+    info(" > /d2b  Converts a decimal value to binary");
+    info(" > /help Prints the help");
 }
 
 void parse_builtin(string_arr* sa)
@@ -73,7 +79,7 @@ void parse_builtin(string_arr* sa)
         b2d(sa);
     else if(strcmp(sa->items[0].items, "/d2b") == 0)
         d2b(sa);
-    else if (strstr(sa->items[0].items, "/h") == 0)
+    else if (strstr(sa->items[0].items, "/h") != NULL)
         help(sa);
     else error("Unknown command %s", sa->items[0].items);
 }
