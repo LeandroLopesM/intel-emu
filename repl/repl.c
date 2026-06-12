@@ -63,6 +63,17 @@ void help() {
     printf(" > /b2d  Converts a binary value to decimal\n");
     printf(" > /d2b  Converts a decimal value to binary\n");
     printf(" > /help Prints the help\n");
+    printf(" > /syn  Prints the syntax reference\n");
+    printf(" > /inst Lists supported isntructions\n");
+}
+
+void syn() {
+    printf(CYAN"I8080-assembler syntax:"RESET" (All case-insensitive)\n");
+    printf(" > "CYAN"[INSTRUCTION]"RESET" => MVI, MOV, etc.\n");
+    printf(" > $"CYAN"[REGISTER]"RESET"   => $A, $HL, etc.\n");
+    printf(" > "CYAN"[HEX]"RESET"h        => 123h, etc.\n");
+    printf(" > "CYAN"[DECIMAL]"RESET"d    => 21d, etc.\n");
+    printf(" > "CYAN"[BINARY]"RESET"b     => 0110b, etc.\n");
 }
 
 void parse_builtin(string_arr* sa)
@@ -77,8 +88,8 @@ void parse_builtin(string_arr* sa)
         dec(sa);
     else if(strcmp(sa->items[0].items, "/b2d") == 0)
         b2d(sa);
-    else if(strcmp(sa->items[0].items, "/d2b") == 0)
-        d2b(sa);
+    else if(strcmp(sa->items[0].items, "/syn") == 0)
+        syn();
     else if (strstr(sa->items[0].items, "/h") != NULL)
         help();
     else error("Unknown command %s", sa->items[0].items);
@@ -196,7 +207,7 @@ int start_repl()
             exec(&c, i);
             compare(copy, c);
 
-            printf("\n+ "GREEN"Success"RESET);
+            printf("\n+ "GREEN"Success"RESET"\n");
             c.rgf.PC = 0;
         }
     }
