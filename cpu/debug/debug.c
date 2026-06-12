@@ -27,7 +27,7 @@ void dump_memory(cpu* c)
 {
     int min = clamp(c->rgf.PC, 0, UINT16_MAX), max = clamp(c->rgf.PC + 5, 0, UINT16_MAX);
 
-    printf("+ Memory dump (%X:%X):\n| { ", min, max);
+    printf(BLUE"+ Memory dump (%X:%X):\n"RESET"| { ", min, max);
     for (int i = clamp(c->rgf.PC, 0, UINT16_MAX); i < clamp(c->rgf.PC + 5, 0, UINT16_MAX); ++i)
     {
         if (i == c->rgf.PC)

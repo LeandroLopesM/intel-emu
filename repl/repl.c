@@ -7,9 +7,9 @@
 #include "../cpu/cpu.h"
 
 #include "builtins/builtins.h"
-#include "i8080-cc/compiler/parser/util/arrays.h"
-#include "i8080-cc/compiler/encoder/encoder.h"
-#include "i8080-cc/compiler/parser/parser.h"
+#include "i8080-cc/assembler/parser/util/arrays.h"
+#include "i8080-cc/assembler/encoder/encoder.h"
+#include "i8080-cc/assembler/parser/parser.h"
 
 #include "i8080-cc/core/common.h"
 cpu c;
@@ -82,7 +82,7 @@ int start_repl()
             exec(&c, i);
             compare(copy, c);
 
-            printf("\n+ "GREEN"Success"RESET"\n");
+            printf("+ "GREEN"Success"RESET"\n");
             c.rgf.PC = 0;
         }
     }

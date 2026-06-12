@@ -10,9 +10,9 @@
 #include "../../cpu/cpu.h"
 #include "../../cpu/debug/debug.h"
 
-#include "../i8080-cc/compiler/parser/util/arrays.h"
-#include "../i8080-cc/compiler/encoder/encoder.h"
-#include "../i8080-cc/compiler/parser/parser.h"
+#include "../i8080-cc/assembler/parser/util/arrays.h"
+#include "../i8080-cc/assembler/encoder/encoder.h"
+#include "../i8080-cc/assembler/parser/parser.h"
 
 #include "../i8080-cc/core/common.h"
 
