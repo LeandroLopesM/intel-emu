@@ -2,6 +2,7 @@ OBJDIR ?= bin/obj
 CFLAGS ?= -Wall -Wextra -ggdb
 REPL_DEPS = 				\
 	$(OBJDIR)/interface.o 	\
+	$(OBJDIR)/builtins.o 	\
 	$(OBJDIR)/compiler.o 	\
 
 
@@ -10,6 +11,9 @@ $(OBJDIR)/repl.o: $(REPL_DEPS)
 
 $(OBJDIR)/interface.o: repl/repl.c
 	$(CC) repl/repl.c -c -o $(OBJDIR)/interface.o $(CFLAGS)
+
+$(OBJDIR)/builtins.o: repl/builtins/builtins.c
+	$(CC) repl/builtins/builtins.c -c -o $(OBJDIR)/builtins.o $(CFLAGS)
 
 CC_DIR=repl/i8080-cc/compiler
 include repl/i8080-cc/compiler/compiler.mk

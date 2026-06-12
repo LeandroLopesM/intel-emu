@@ -1,5 +1,6 @@
 #include "../../core/colors.h"
 
+#include "../../core/common.h"
 #include "../i8080-cc/compiler/parser/util/arrays.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,4 +41,21 @@ void b2d(string_arr* sa)
         printf(RED"+"RESET" USAGE: /b2d [num]\n| Convertes number from binary to decimal");
 
     printf("%ld\n", strtol(sa->items[1].items, NULL, 2));
+}
+
+const char* b2s(byte n)
+{
+    static char out[9];
+    int i = 0;
+
+    while (n && i != 9) {
+        if (n & 1)
+            out[i++] = '1';
+        else
+            out[i++] = '0';
+
+        n >>= 1;
+    }
+    out[8] = 0;
+    return out;
 }

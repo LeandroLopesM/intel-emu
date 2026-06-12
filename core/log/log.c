@@ -1,14 +1,14 @@
 #include "../../cpu/decode/decode.h"
 #include "../../cpu/debug/debug.h"
 #include "../../cpu/cpu.h"
-#include "../colors.h"
+#include "log.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 static void __log(char* prefix, const char* fmt, va_list *va)
 {
-    printf("\n[%5s] ", prefix);
+    printf("\n%5s ", prefix);
     vprintf( fmt, *va);
 }
 
@@ -16,7 +16,8 @@ void error(const char* fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    __log(RED"ERROR"RESET, fmt, &va);
+    __log(
+        ERROR_PREFIX, fmt, &va);
     va_end(va);
 }
 
@@ -24,7 +25,7 @@ void warn(const char* fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    __log(YELLOW"WARN"RESET, fmt, &va);
+    __log(WARN_PREFIX, fmt, &va);
     va_end(va);
 }
 
@@ -32,7 +33,7 @@ void info(const char* fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    __log(CYAN"INFO"RESET, fmt, &va);
+    __log(INFO_PREFIX, fmt, &va);
     va_end(va);
 }
 
@@ -40,7 +41,7 @@ void debug(const char* fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    __log(BLUE"DEBUG"RESET, fmt, &va);
+    __log(DEBUG_PREFIX, fmt, &va);
     va_end(va);
 }
 
@@ -49,7 +50,7 @@ static void __panic(int die, const char* fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    __log(BG_RED"PANIC"RESET, fmt, &va);
+    __log(PANIC_PREFIX, fmt, &va);
     va_end(va);
 
     if (die) exit(1);
