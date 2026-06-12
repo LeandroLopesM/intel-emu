@@ -55,14 +55,14 @@ dump_all:
     }
 }
 
-void help(string_arr* _) {
-    info("Available commands:");
-    info(" > /dump Shows the current state of CPU registers ");
-    info(" > /set  Sets a specific register or memory position to a value");
-    info(" > /hex  Converts a decimal value to hexadecimal");
-    info(" > /b2d  Converts a binary value to decimal");
-    info(" > /d2b  Converts a decimal value to binary");
-    info(" > /help Prints the help");
+void help() {
+    printf("Available commands:\n");
+    printf(" > /dump Shows the current state of CPU registers \n");
+    printf(" > /set  Sets a specific register or memory position to a value\n");
+    printf(" > /hex  Converts a decimal value to hexadecimal\n");
+    printf(" > /b2d  Converts a binary value to decimal\n");
+    printf(" > /d2b  Converts a decimal value to binary\n");
+    printf(" > /help Prints the help\n");
 }
 
 void parse_builtin(string_arr* sa)
@@ -80,7 +80,7 @@ void parse_builtin(string_arr* sa)
     else if(strcmp(sa->items[0].items, "/d2b") == 0)
         d2b(sa);
     else if (strstr(sa->items[0].items, "/h") != NULL)
-        help(sa);
+        help();
     else error("Unknown command %s", sa->items[0].items);
 }
 
