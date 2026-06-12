@@ -56,7 +56,7 @@ dump_all:
 }
 
 void help() {
-    printf("Available commands:\n");
+    printf(CYAN"Available commands:\n"RESET);
     printf(" > /dump Shows the current state of CPU registers \n");
     printf(" > /set  Sets a specific register or memory position to a value\n");
     printf(" > /hex  Converts a decimal value to hexadecimal\n");
@@ -153,7 +153,7 @@ int start_repl()
 
     while (1)
     {
-        printf("\n%llu> ", i++);
+        printf("%llu> ", i++);
 
         if(!read_line(&in_raw))
         {
