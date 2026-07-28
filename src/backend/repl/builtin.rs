@@ -4,7 +4,7 @@ use std::{collections::HashMap, sync::Arc};
 use log::{error};
 use static_init::dynamic;
 
-use crate::core::Intel8080;
+use crate::backend::core::Intel8080;
 
 #[derive(Clone, Debug)]
 struct Builtin {

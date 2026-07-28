@@ -3,7 +3,7 @@ mod builtin;
 use log::error;
 use rustyline::{DefaultEditor, error::ReadlineError};
 
-use crate::core::Intel8080;
+use crate::backend::core::Intel8080;
 
 pub fn init() {
     // `()` can be used when no completer is required
