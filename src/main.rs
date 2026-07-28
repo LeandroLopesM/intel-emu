@@ -1,10 +1,8 @@
-pub mod core;
-
-mod compile;
-mod exec;
-mod repl;
+mod backend;
 
 use clap::{Parser, Subcommand};
+
+use crate::backend::repl;
 
 #[derive(Parser, Debug, Clone)]
 #[command(about, version)]
