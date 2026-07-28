@@ -1,3 +1,0 @@
-[submodule "repl/i8080-cc"]
-	path = repl/i8080-asm
-	url = https://github.com/leandrolopesm/i8080-cc
