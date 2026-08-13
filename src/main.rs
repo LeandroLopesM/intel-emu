@@ -2,7 +2,7 @@ mod backend;
 
 use clap::{Parser, Subcommand};
 
-use crate::backend::repl;
+use crate::backend::{compile, repl};
 
 #[derive(Parser, Debug, Clone)]
 #[command(about, version)]
@@ -31,13 +31,14 @@ fn main() {
     match args.mode {
         Mode::REPL => {
             repl::init();
-        }
-        _ => todo!("compilation and execution not yet supported")
+        },
+        Mode::Compile{source} => {
+            // todo!(); //compile::from_asm(source);
+            compile::from_source("MVI A, 100h\n".to_string());
+        },
+        _ => todo!("compilation and execution not yet supported"),
         // Mode::Execute{file} => {
         //     todo!(); //exec::from_binary(file);
-        // }
-        // Mode::Compile{source} => {
-        //     todo!(); //compile::from_asm(source);
         // }
     }
 }

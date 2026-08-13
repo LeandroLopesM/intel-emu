@@ -1,0 +1,18 @@
+alpha = { 'a'..'z' | 'A'..'Z' }
+digit = { '0'..'9' }
+hex = { '0'..'9' | 'A'..'F' | 'a'..'f' }
+
+hexnum = { (hex)+ ~ "h" }
+binnum = { ('0'..'1')+ ~ "b" }
+decnum = { ('0'..'9')+ }
+
+Num = { (hexnum | binnum | decnum) }
+Ident = { (alpha | digit | "_")+ }
+Arg = { (Ident | Num) }
+
+Label = { Ident ~ ":" }
+Instruction = { Ident ~ (","? ~ (Ident | Num) ~ ","?)* }
+
+Line = { (Label+ | Instruction) }
+    
+File = { SOI ~ (Line ~ ("\n" | "\r\n")?)* ~ EOI }
