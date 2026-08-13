@@ -6,12 +6,15 @@ hexnum = { (hex)+ ~ "h" }
 binnum = { ('0'..'1')+ ~ "b" }
 decnum = { ('0'..'9')+ }
 
-Num = { (hexnum | binnum | decnum) }
+
+ = { (hexnum | binnum | decnum) }
 Ident = { (alpha | digit | "_")+ }
 Arg = { (Ident | Num) }
 
 Label = { Ident ~ ":" }
-Instruction = { Ident ~ (","? ~ (Ident | Num) ~ ","?)* }
+Instruction = { 
+    Ident ~ ( (Ident | Num) ~ ","? )* ~ "\n"
+}
 
 Line = { (Label+ | Instruction) }
     
