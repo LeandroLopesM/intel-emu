@@ -1,8 +1,11 @@
 mod backend;
 
-use clap::{Parser, Subcommand};
+use std::{fs, process::exit};
 
-use crate::backend::{compile, repl};
+use clap::{Parser, Subcommand};
+use log::error;
+
+use crate::backend::{compile, exec, repl};
 
 #[derive(Parser, Debug, Clone)]
 #[command(about, version)]
@@ -15,12 +18,8 @@ struct Args {
 #[derive(Subcommand, Debug, Clone)]
 enum Mode {
     REPL,
-    Execute{
-        file: String,
-    },
-    Compile{
-        source: String,
-    },
+    Execute { file: String },
+    Compile { source: String },
 }
 
 fn main() {
@@ -31,14 +30,30 @@ fn main() {
     match args.mode {
         Mode::REPL => {
             repl::init();
-        },
-        Mode::Compile{source} => {
+        }
+        Mode::Compile { source } => {
+            match fs::read(source.clone()) {
+                Ok(bytes) => {
+                    compile::from_source(&source, str::from_utf8(&bytes).unwrap().to_string());
+                }
+                Err(e) => {
+                    error!("Failed to open source file '{source}'\n{e}");
+                    exit(1)
+                }
+            }
+
             // todo!(); //compile::from_asm(source);
-            compile::from_source("MVI A, 100h\n".to_string());
-        },
-        _ => todo!("compilation and execution not yet supported"),
-        // Mode::Execute{file} => {
-        //     todo!(); //exec::from_binary(file);
-        // }
+        }
+        Mode::Execute{file} => {
+            match fs::read(file.clone()) {
+                Ok(bytes) => {
+                    exec::from_binary(bytes);
+                },
+                Err(e) => {
+                    error!("Failed to open executable file '{file}'\n{e}");
+                    exit(1)
+                }
+            }
+        }
     }
 }

@@ -12,9 +12,12 @@ pub fn init() {
     let mut cpu = Intel8080::new(Some(u16::MAX as usize));
 
     loop {
-        match rl.readline(&format!("{:0<4X} > ", cpu.registers.get_dword("PC").unwrap())) {
+        match rl.readline(&format!(
+            "{:0<4X} > ",
+            cpu.registers.get_dword("PC").unwrap()
+        )) {
             Ok(line) => exec_line(&mut cpu, line),
-            
+
             Err(ReadlineError::Interrupted) => continue,
             Err(ReadlineError::Eof) => break,
             Err(err) => error!("Failed to read line ({})", err),

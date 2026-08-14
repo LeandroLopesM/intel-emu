@@ -1,21 +1,27 @@
-alpha = { 'a'..'z' | 'A'..'Z' }
-digit = { '0'..'9' }
-hex = { '0'..'9' | 'A'..'F' | 'a'..'f' }
+NL = _{ ("\n" | "\r\n") }
+WS = _{ (" " | "\t")* }
+alpha = _{ 'a'..'z' | 'A'..'Z' }
+digit = _{ '0'..'9' }
+hex = _{ '0'..'9' | 'A'..'F' | 'a'..'f' }
 
-hexnum = { (hex)+ ~ "h" }
-binnum = { ('0'..'1')+ ~ "b" }
-decnum = { ('0'..'9')+ }
+Number = {
+    (hex)+ ~ "h"
+    | ('0'..'1')+ ~ "b" 
+    | ('0'..'9')+
+}
+Ident   = { alpha ~ (alpha | digit | "_")* }
 
-
- = { (hexnum | binnum | decnum) }
-Ident = { (alpha | digit | "_")+ }
-Arg = { (Ident | Num) }
-
-Label = { Ident ~ ":" }
-Instruction = { 
-    Ident ~ ( (Ident | Num) ~ ","? )* ~ "\n"
+StringChar = _{ ! "\"" ~ ANY }
+String  = {
+    "\"" ~ StringChar+ ~ "\""
 }
 
-Line = { (Label+ | Instruction) }
-    
-File = { SOI ~ (Line ~ ("\n" | "\r\n")?)* ~ EOI }
+Parameter = _{ (Ident | Number | String) }
+Argument = _{ Parameter ~ ("," ~ WS ~ Argument)? }
+
+Label       = { WS    ~ Ident ~ ":" ~ (Comment | NL) }
+Instruction = { Ident ~ WS    ~ (Argument | Comment | NL) } 
+Comment     = { ";"   ~ ANY*  ~ NL }
+
+Line = { WS ~ (Comment | Label | Instruction | NL) }
+File = { SOI ~ (Line)* ~ EOI }

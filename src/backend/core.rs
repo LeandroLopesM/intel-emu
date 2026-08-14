@@ -21,28 +21,29 @@ impl Intel8080 {
                 ("PC", Register::DWord(0)),
                 ("SP", Register::DWord(0)),
                 ("PSW", Register::DWord(0)),
-                    ("A", Register::HiOf("PSW")),
-                    ("S", Register::BitOf("PSW", 0)), // signed
-                    ("Z", Register::BitOf("PSW", 1)), // Zero
-                    ("I", Register::BitOf("PSW", 2)), // interrupt enable
-                    ("P", Register::BitOf("PSW", 3)), // parity
-                    ("CY", Register::BitOf("PSW", 4)), // Carry
-                    ("AC", Register::BitOf("PSW", 5)), // AuxCy
+                ("A", Register::HiOf("PSW")),
+                ("S", Register::BitOf("PSW", 0)),  // signed
+                ("Z", Register::BitOf("PSW", 1)),  // Zero
+                ("I", Register::BitOf("PSW", 2)),  // interrupt enable
+                ("P", Register::BitOf("PSW", 3)),  // parity
+                ("CY", Register::BitOf("PSW", 4)), // Carry
+                ("AC", Register::BitOf("PSW", 5)), // AuxCy
                 ("DE", Register::DWord(0)),
-                    ("D", Register::HiOf("DE")),
-                    ("E", Register::LowOf("DE")),
+                ("D", Register::HiOf("DE")),
+                ("E", Register::LowOf("DE")),
                 ("BC", Register::DWord(0)),
-                    ("B", Register::HiOf("BC")),
-                    ("C", Register::LowOf("BC")),
+                ("B", Register::HiOf("BC")),
+                ("C", Register::LowOf("BC")),
                 ("HL", Register::DWord(0)),
-                    ("H", Register::HiOf("HL")),
-                    ("L", Register::LowOf("HL")),
-            ])
-        }
+                ("H", Register::HiOf("HL")),
+                ("L", Register::LowOf("HL")),
+            ]),
+        };
     }
 }
 
 #[derive(Clone, Copy, Debug)]
+#[allow(dead_code)]
 pub enum Register {
     BitOf(&'static str, u8),
     HiOf(&'static str),
@@ -59,7 +60,7 @@ pub struct RegisterList {
 impl RegisterList {
     pub fn from_vec(vec: Vec<(&'static str, Register)>) -> Self {
         Self {
-            list: vec.iter().cloned().collect()
+            list: vec.iter().cloned().collect(),
         }
     }
 
@@ -72,10 +73,10 @@ impl RegisterList {
 
         match reg.unwrap() {
             Register::DWord(val) => Ok(*val),
-            _ => Err("Register type doesn't support DWord")
+            _ => Err("Register type doesn't support DWord"),
         }
     }
-    
+
     pub fn set_dword<S: AsRef<str>>(&mut self, name: S, val: u16) {
         let reg = self.list.get_mut(name.as_ref());
 
